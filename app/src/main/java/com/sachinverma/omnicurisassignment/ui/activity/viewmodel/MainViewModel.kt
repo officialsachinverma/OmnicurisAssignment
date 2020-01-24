@@ -29,8 +29,12 @@ class MainViewModel : ViewModel() {
     private fun loadJsonData() {
 //        val response = gson.fromJson(FileReader("/Users/sachinverma/AndroidStudioProjects/sample-data.json"), Response::class.java)
         val response = gson.fromJson(Constants.JSON, Response::class.java)
-        if (response.quizList.size > 0)
-            _quizList.value = response.quizList
+        if (response.status.equals("success")) {
+            if (response.quizList.size > 0)
+                _quizList.value = response.quizList
+        } else {
+            _quizList.value = arrayListOf()
+        }
     }
 
 }
